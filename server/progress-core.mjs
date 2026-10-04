@@ -7,7 +7,7 @@ function validate(x){
  const r=x.record;const valid=groups[x.group-1];
  if(!Array.isArray(r.selected)||r.selected.length>4||new Set(r.selected).size!==r.selected.length||r.selected.some(v=>!valid.includes(v))||!Array.isArray(r.done)||new Set(r.done).size!==r.done.length||r.done.some(v=>!r.selected.includes(v))||!screens.includes(r.screen))return null;
  if(r.screen==='select'&&r.selected.length>2)return null;
- const record=normalizeFlow({group:x.group,selected:r.selected,done:r.done,screen:r.screen,extra:valid.includes(r.extra)?r.extra:null,pending:r.selected.includes(r.pending)?r.pending:null,leaderConfirmed:!!r.leaderConfirmed,role:Number.isInteger(r.role)&&r.role>=-1&&r.role<5?r.role:-1,canva:!!r.canva,uploaded:!!r.uploaded});
+ const record=normalizeFlow({group:x.group,selected:r.selected,done:r.done,screen:r.screen,extra:valid.includes(r.extra)?r.extra:null,pending:r.selected.includes(r.pending)?r.pending:null,leaderConfirmed:!!r.leaderConfirmed,reviewing:!!r.reviewing,role:Number.isInteger(r.role)&&r.role>=-1&&r.role<5?r.role:-1,canva:!!r.canva,uploaded:!!r.uploaded});
  const category=x.group===5?'observer':'child';
  return {id:category+'/'+x.group+'/'+x.device,device_id:x.device,group_id:x.group,category,record_json:JSON.stringify(record),stage:stageOf(record),updated_at:Date.now(),resetVersion:String(x.resetVersion??'0'),revision:Number.isFinite(x.revision)?x.revision:Date.now()};
 }
