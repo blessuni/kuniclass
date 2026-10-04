@@ -13,9 +13,11 @@ const cases=[['다람쥐 모둠',['협동','책임'],'빨간색'],['낙엽 모�
 const assertOne=()=>{assert.ok(screen.getByRole('heading',{name:/하나 완성/}));assert.ok(screen.getByText('이제 이 마음보석을 표현해요'));const text=document.querySelector('main')!.textContent!;assert.doesNotMatch(text,/모둠 자리로 돌아가요|사진 확인|사진을 함께 확인|Canva|사진 올리기|색 칸/);assert.equal(document.querySelectorAll('a[href*="canva"]').length,0);assert.equal(document.querySelectorAll('.gem[aria-pressed="true"]').length,1);};
 for(let i=0;i<cases.length;i++)test(`${cases[i][0]} 실제 화면: 1/2 차단·새로고침·홈 복귀·2/2 이후 순서`,async()=>{
  cleanup();localStorage.clear();const [name,gems,color]=cases[i];const group=i+1;
- localStorage.setItem('diamond-maeum-v1',JSON.stringify({group,selected:gems,done:[],screen:'activity',extra:null}));
+ localStorage.setItem('diamond-maeum-v1',JSON.stringify({group,selected:[],done:[],screen:'select',extra:null}));
  render(React.createElement(App));
- fireEvent.click(screen.getAllByRole('button',{name:/이 마음보석 다 했어요/})[0]);assertOne();
+ fireEvent.click(screen.getByRole('button',{name:gems[0] as string,exact:true}));fireEvent.click(screen.getByRole('button',{name:gems[1] as string,exact:true}));fireEvent.click(screen.getByRole('button',{name:/선택했어요/}));fireEvent.click(screen.getByRole('button',{name:/우리 역할 보기/}));
+ assert.ok(screen.getByText('친구들의 생각을 들어요.'));for(const role of ['① 진행자','② 감독','③ 촬영자','④ 올림이','⑤ 완성이'])assert.ok(screen.getByRole('button',{name:new RegExp(role+'$')}));for(const [role,icon] of [['③ 촬영자','camera'],['④ 올림이','canva']]){const card=screen.getByRole('button',{name:new RegExp(role+'$')});assert.ok(card.querySelector('.role-picture'));assert.equal(card.querySelector('img')?.getAttribute('src'),'/app-icons/'+icon+'.png');fireEvent.click(card);assert.equal(card.getAttribute('aria-expanded'),'true');}for(const role of ['① 진행자','② 감독','⑤ 완성이']){const card=screen.getByRole('button',{name:new RegExp(role+'$')});assert.ok(card.querySelector('.role-picture'));assert.equal(card.querySelector('img'),null);}fireEvent.click(screen.getByRole('button',{name:/② 감독$/}));assert.ok(screen.getByText('우리 생각이 잘 보이도록 장면을 만들어요.'));fireEvent.click(screen.getByRole('button',{name:/마음보석을 표현해요/}));
+ assert.equal(screen.getByRole('img',{name:'카메라 앱 아이콘'}).getAttribute('src'),'/app-icons/camera.png');fireEvent.click(screen.getAllByRole('button',{name:/이 마음보석 다 했어요/})[0]);assertOne();
  let saved=JSON.parse(localStorage.getItem('diamond-maeum-v1')!);assert.deepEqual(saved.done,[gems[0]]);assert.equal(saved.screen,'oneDone');
  // 실제 앱을 제거했다 다시 실행하여 새로고침의 저장 복원 경로 검사.
  cleanup();render(React.createElement(App));assertOne();
@@ -29,10 +31,12 @@ for(let i=0;i<cases.length;i++)test(`${cases[i][0]} 실제 화면: 1/2 차단·�
  fireEvent.click(screen.getByRole('button',{name:/모둠 자리로 돌아가요/}));
  assert.ok(screen.getByRole('heading',{name:'모둠 자리로 돌아가요'}));assert.equal(screen.getAllByRole('img',{name:'다섯 친구가 모둠 책상 앞 의자에 앉은 그림'}).length,2);
  assert.equal(document.querySelectorAll('a[href*="canva"]').length,0);
- fireEvent.click(screen.getByRole('button',{name:/모였어요/}));assert.ok(screen.getByRole('heading',{name:'우리 사진을 함께 확인해요'}));assert.equal(document.querySelectorAll('a[href*="canva"]').length,0);
+ fireEvent.click(screen.getByRole('button',{name:/모였어요/}));assert.ok(screen.getByRole('heading',{name:'우리 사진을 함께 확인해요'}));assert.equal(screen.getByRole('img',{name:'갤러리 앱 아이콘'}).getAttribute('src'),'/app-icons/gallery.png');assert.equal(document.querySelectorAll('a[href*="canva"]').length,0);
  fireEvent.click(screen.getByRole('button',{name:/사진을 확인했어요/}));assert.ok(screen.getByText(new RegExp(color+' 칸에')));
- const link=screen.getByRole('link',{name:/우리 사진 올리기/});assert.equal(link.getAttribute('href'),'https://canva.link/lg44g9coxwzxamt');
+ assert.equal(screen.getByRole('img',{name:'Canva 앱 아이콘'}).getAttribute('src'),'/app-icons/canva.png');assert.equal(document.querySelector('img[src="/canva-logo.svg"]'),null);const link=screen.getByRole('link',{name:/우리 사진 올리기/});assert.equal(link.getAttribute('href'),'https://canva.link/lg44g9coxwzxamt');
  saved=JSON.parse(localStorage.getItem('diamond-maeum-v1')!);assert.deepEqual(saved.done,gems);assert.equal(saved.screen,'upload');
+ assert.equal(screen.queryByRole('button',{name:/사진 올렸어요/}),null);assert.doesNotMatch(document.querySelector('main')!.textContent!,/뒤로|돌아와요|완료 화면/);
+ link.addEventListener('click',e=>e.preventDefault());fireEvent.click(link);saved=JSON.parse(localStorage.getItem('diamond-maeum-v1')!);assert.equal(saved.canva,true);assert.equal(saved.screen,'upload');cleanup();render(React.createElement(App));assert.ok(screen.getByRole('link',{name:/우리 사진 올리기/}));assert.equal(screen.queryByRole('button',{name:/사진 올렸어요/}),null);assert.equal(JSON.parse(localStorage.getItem('diamond-maeum-v1')!).canva,true);
  cleanup();
 });
 test.afterEach(()=>cleanup());
