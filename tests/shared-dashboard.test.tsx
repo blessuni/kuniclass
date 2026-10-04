@@ -1,0 +1,40 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
+import {handleProgress} from '../server/progress-core.mjs';
+const dom=new JSDOM('<!doctype html><html><body></body></html>',{url:'https://class.example/'});
+Object.assign(globalThis,{window:dom.window,document:dom.window.document,HTMLElement:dom.window.HTMLElement,localStorage:dom.window.localStorage});
+Object.defineProperty(globalThis,'navigator',{value:dom.window.navigator,configurable:true});
+const nativeFetch=globalThis.fetch;
+const data=new Map();let offline=false;
+const store={list:async()=>({blobs:[...data.keys()].map(key=>({key}))}),get:async(key:string)=>data.get(key)||null,setJSON:async(key:string,value:any)=>data.set(key,value)};
+const endpoint=process.env.PROGRESS_TEST_URL;
+globalThis.fetch=async(url:any,options:any={})=>{if(offline)throw Error('offline');if(endpoint)return nativeFetch(endpoint,options);return handleProgress(new Request('https://class.example'+url,options),store)};
+Object.defineProperty(navigator,'sendBeacon',{value:()=>false,configurable:true});
+const React=await import('react');
+const {render,cleanup,fireEvent,within,waitFor}=await import('@testing-library/react');
+const {default:App}=await import('../src/App.tsx');
+const gems=[['협동','책임'],['배려','질서'],['경청','성실'],['공감','끈기'],['존중','경청']];
+for(let group=1;group<=5;group++)test(`기기 간 진행상황 공유: 모둠 ${group}${endpoint?' (실제 Netlify Functions/Blobs)':''}`,async()=>{
+ cleanup();localStorage.clear();const selected=gems[group-1];const device='dashboard-writer-'+group;
+ localStorage.setItem('maeum-device',device);localStorage.setItem('diamond-maeum-v1',JSON.stringify({group,selected,done:[],screen:'roles',extra:null}));
+ const writer=render(React.createElement(App));const w=within(writer.container);
+ // 두 번째 앱 인스턴스는 다른 기기 번호와 빈 로컬 기록으로 시작: 공유 GET만으로 첫 기기 기록 확인.
+ localStorage.clear();localStorage.setItem('maeum-device','dashboard-teacher-'+group);
+ const teacher=render(React.createElement(App));const t=within(teacher.container);
+ assert.equal(teacher.container.querySelector('.settings'),null);assert.doesNotMatch(teacher.container.textContent!,/⚙️|교사용 설정/);
+ fireEvent.click(t.getByRole('button',{name:'📊 진행상황 보기'}));
+ const status=async(expected:string)=>{await waitFor(async()=>{const response=await fetch('/api/progress');const {rows}=await response.json();assert.equal(rows.find((row:any)=>row.device_id===device)?.stage,expected)},{timeout:8000});fireEvent.click(t.getByRole('button',{name:'↻ 새로고침'}));await waitFor(()=>assert.ok(teacher.container.querySelector(group===5?'.observer-progress p':'.progress-card.group'+group+' p')!.textContent!.includes(expected)))};
+ await status('역할 확인');fireEvent.click(w.getByRole('button',{name:/두 마음보석 이야기해요/}));await status('두 마음보석 표현 방법 의논 중');fireEvent.click(w.getByRole('button',{name:/의논했어요! 촬영하러 출발/}));await status('첫 번째 마음보석 표현 중 (0/2)');
+ fireEvent.click(w.getAllByRole('button',{name:/이 마음보석 다 했어요/})[0]);await status('두 번째 마음보석 표현 중 (1/2)');
+ fireEvent.click(w.getByRole('button',{name:/이 마음보석 다 했어요/}));await status('두 마음보석 촬영 완료 (2/2)');
+ fireEvent.click(w.getByRole('button',{name:/모둠 자리로 돌아가요/}));await status('🪑 모둠 자리로 이동');
+ fireEvent.click(w.getByRole('button',{name:/모였어요/}));await status('📱 사진 확인');
+ fireEvent.click(w.getByRole('button',{name:/사진을 확인했어요/}));await status('🎨 Canva 업로드 안내');
+ const link=w.getByRole('link',{name:/우리 사진 올리기/});link.addEventListener('click',event=>event.preventDefault());fireEvent.click(link);await status('🎨 Canva 업로드로 이동');assert.equal(t.queryByText('완료',{exact:true}),null);
+ fireEvent.click(t.getByRole('button',{name:'← 돌아가기'}));assert.equal(t.queryByRole('dialog'),null);assert.ok(t.getByRole('heading',{name:'우리 모둠을 정해요'}));cleanup();
+});
+if(!endpoint)test('오프라인 로컬 보존 후 재연결 공유 및 교사 로컬 대체 표시',async()=>{
+ cleanup();localStorage.clear();offline=true;localStorage.setItem('maeum-device','offline-writer');localStorage.setItem('diamond-maeum-v1',JSON.stringify({group:1,selected:gems[0],done:[],screen:'activity',extra:null}));const app=render(React.createElement(App));const ui=within(app.container);fireEvent.click(ui.getAllByRole('button',{name:/이 마음보석 다 했어요/})[0]);assert.deepEqual(JSON.parse(localStorage.getItem('diamond-maeum-v1')!).done,['협동']);fireEvent.click(ui.getByRole('button',{name:'📊 진행상황 보기'}));await waitFor(()=>assert.ok(ui.getByText('두 번째 마음보석 표현 중 (1/2)')));offline=false;window.dispatchEvent(new dom.window.Event('online'));await waitFor(async()=>{const {rows}=await (await fetch('/api/progress')).json();assert.equal(rows.find((r:any)=>r.device_id==='offline-writer')?.stage,'두 번째 마음보석 표현 중 (1/2)')},{timeout:8000});fireEvent.click(ui.getByRole('button',{name:'↻ 새로고침'}));await waitFor(()=>assert.ok(ui.getByText('여러 태블릿의 진행상황 · 4초마다 확인')));cleanup();
+});
+test.afterEach(()=>{offline=false;cleanup()});test.after(()=>dom.window.close());

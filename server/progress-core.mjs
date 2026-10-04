@@ -1,7 +1,7 @@
 import {normalizeFlow,stageOf} from './activity-flow.mjs';
 export {stageOf} from './activity-flow.mjs';
 const groups=[['협동','책임','경청','감사'],['배려','질서','공감','용기'],['경청','성실','협동','예의'],['공감','끈기','배려','자주'],['존중','경청','공감','협동']];
-const screens=['select','confirm','roles','activity','extra','finish','return','photos','oneDone','captured','upload'];
+const screens=['select','confirm','roles','discussion','activity','extra','finish','return','photos','oneDone','captured','upload'];
 function validate(x){
  if(!x||typeof x.device!=='string'||!/^[a-zA-Z0-9-]{1,80}$/.test(x.device)||!Number.isInteger(x.group)||x.group<1||x.group>5||x.record?.group!==x.group)return null;
  const r=x.record;const valid=groups[x.group-1];
