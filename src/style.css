@@ -93,3 +93,16 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 @media(max-width:1100px){.operator-rail{left:14px;width:140px;top:74px;gap:12px}.has-operator>section{width:calc(100% - 150px);margin-left:150px}.operator-number{font-size:64px}.operator-badge strong{font-size:29px}.operator-badge>span:last-child{font-size:20px}.operator-picture{width:72px;height:64px}.back-button{font-size:23px}.has-operator .roles .role-name{font-size:23px}.has-operator .discussion-screen h1{font-size:28px}.has-operator .roles{gap:6px}.has-operator .leader-numbers{gap:8px}.has-operator .leader-number{min-width:65px}}
 .leader-discover{font-size:clamp(30px,3.5vw,46px);min-height:110px;padding:24px 38px}.leader-reveal .leader-picked{animation:leaderReveal .45s ease-out}@keyframes leaderReveal{0%{transform:scale(.9);opacity:.3}65%{transform:scale(1.04);opacity:1}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.leader-reveal .leader-picked{animation:none}}
 .operator-back-space{height:56px;flex-shrink:0}
+
+/* Canva에서 돌아온 뒤 모둠 완료 축하 화면 */
+.complete-screen{position:relative;min-height:calc(100vh - 92px);display:grid;place-items:center;overflow:hidden;padding:28px}
+.complete-card{position:relative;z-index:3;text-align:center;background:rgba(255,255,255,.88);border:4px solid rgba(255,255,255,.95);border-radius:38px;padding:38px 64px;box-shadow:0 18px 50px rgba(74,52,108,.18);animation:completeBounce .7s cubic-bezier(.2,.9,.3,1.25)}
+.complete-pop{font-size:82px;animation:popSpin .75s ease-out}
+.complete-card h1{font-size:clamp(54px,8vw,92px);margin:0;color:#6f48bd;text-shadow:0 4px 0 #fff}
+.complete-card h2{font-size:clamp(30px,4.5vw,52px);margin:8px 0 12px;color:#ef6c74}
+.complete-card p{font-size:clamp(22px,2.6vw,32px);font-weight:800;margin:0;color:#4b4a62}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:2}
+.confetti i{--x:calc((var(--i) * 37) % 100);position:absolute;left:calc(var(--x)*1%);top:-12%;width:14px;height:28px;border-radius:5px;background:hsl(calc(var(--i)*47),85%,62%);transform:rotate(calc(var(--i)*23deg));animation:confettiFall 2.8s cubic-bezier(.2,.7,.4,1) calc((var(--i) % 7)*.06s) both}
+@keyframes confettiFall{0%{top:-12%;transform:translateX(0) rotate(0) scale(.7)}35%{transform:translateX(calc((var(--i)%2)*70px - 35px)) rotate(260deg) scale(1.1)}100%{top:112%;transform:translateX(calc((var(--i)%3)*55px - 55px)) rotate(720deg) scale(.85)}}
+@keyframes completeBounce{0%{opacity:0;transform:scale(.55) rotate(-3deg)}65%{opacity:1;transform:scale(1.07) rotate(1deg)}100%{transform:scale(1)}}
+@keyframes popSpin{0%{transform:scale(.2) rotate(-30deg)}70%{transform:scale(1.25) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
