@@ -116,3 +116,5 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 .discussion-check.checked{border-color:#72c7a2;background:#f0fbf5}
 .discussion-check.checked .check-box{background:#39b87b;color:white}
 .guided-footer .primary:disabled{opacity:.42;filter:grayscale(.25);cursor:not-allowed;transform:none}
+
+.promise-screen{max-width:980px;margin:0 auto}.promise-chant{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px auto;max-width:900px}.promise-chant button{min-height:150px;border:4px solid #eadcf4;border-radius:28px;background:#fff;font:inherit;font-size:30px;box-shadow:0 8px 0 #eadcf4;position:relative}.promise-chant button span{display:none;position:absolute;right:16px;top:12px;font-size:34px;color:#2fa56b}.promise-chant button.checked{border-color:#65c99a;background:#effcf5;transform:translateY(4px);box-shadow:0 4px 0 #65c99a}.promise-chant button.checked span{display:block}
