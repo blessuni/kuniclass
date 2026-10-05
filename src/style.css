@@ -106,3 +106,5 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 @keyframes confettiFall{0%{top:-12%;transform:translateX(0) rotate(0) scale(.7)}35%{transform:translateX(calc((var(--i)%2)*70px - 35px)) rotate(260deg) scale(1.1)}100%{top:112%;transform:translateX(calc((var(--i)%3)*55px - 55px)) rotate(720deg) scale(.85)}}
 @keyframes completeBounce{0%{opacity:0;transform:scale(.55) rotate(-3deg)}65%{opacity:1;transform:scale(1.07) rotate(1deg)}100%{transform:scale(1)}}
 @keyframes popSpin{0%{transform:scale(.2) rotate(-30deg)}70%{transform:scale(1.25) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
+
+.observer-resources{margin:16px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:14px;color:#667085}.observer-resources>span{font-weight:800}.observer-resources a{display:inline-flex;align-items:center;min-height:40px;padding:7px 13px;border-radius:13px;background:#fff;border:1.5px solid #d8e0ea;color:#334155;text-decoration:none;font-weight:800;box-shadow:0 3px 10px #0000000d}.observer-resources a:active{transform:scale(.98)}
