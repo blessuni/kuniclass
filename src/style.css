@@ -108,3 +108,11 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 @keyframes popSpin{0%{transform:scale(.2) rotate(-30deg)}70%{transform:scale(1.25) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
 
 .observer-resources{margin:16px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:14px;color:#667085}.observer-resources>span{font-weight:800}.observer-resources a{display:inline-flex;align-items:center;min-height:40px;padding:7px 13px;border-radius:13px;background:#fff;border:1.5px solid #d8e0ea;color:#334155;text-decoration:none;font-weight:800;box-shadow:0 3px 10px #0000000d}.observer-resources a:active{transform:scale(.98)}
+
+/* 감독 작전회의 체크 */
+.discussion-check{width:100%;display:flex;align-items:center;gap:14px;border:2px solid #d9dce6;background:#fff;border-radius:18px;padding:15px 18px;margin-top:12px;text-align:left;font:inherit;color:#34323b;box-shadow:0 3px 0 rgba(0,0,0,.04)}
+.discussion-check .check-box{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:12px;background:#f3f4f8;font-size:28px;font-weight:900;color:#8b8e99}
+.discussion-check b{font-size:1.06em;color:#4b3d82}
+.discussion-check.checked{border-color:#72c7a2;background:#f0fbf5}
+.discussion-check.checked .check-box{background:#39b87b;color:white}
+.guided-footer .primary:disabled{opacity:.42;filter:grayscale(.25);cursor:not-allowed;transform:none}
