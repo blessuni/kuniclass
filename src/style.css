@@ -119,3 +119,11 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 
 .promise-screen{max-width:980px;margin:0 auto}.promise-chant{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px auto;max-width:900px}.promise-chant button{min-height:150px;border:4px solid #eadcf4;border-radius:28px;background:#fff;font:inherit;font-size:30px;box-shadow:0 8px 0 #eadcf4;position:relative}.promise-chant button span{display:none;position:absolute;right:16px;top:12px;font-size:34px;color:#2fa56b}.promise-chant button.checked{border-color:#65c99a;background:#effcf5;transform:translateY(4px);box-shadow:0 4px 0 #65c99a}.promise-chant button.checked span{display:block}
 .role{position:relative}.role-checkmark{position:absolute;right:10px;top:8px;font-size:1.35rem;font-weight:900;color:#1f9d68}.role.checked{box-shadow:0 0 0 4px rgba(47,165,107,.18) inset}.role.checked .role-checkmark{animation:popCheck .18s ease-out}@keyframes popCheck{from{transform:scale(.4)}to{transform:scale(1)}}
+
+/* Large original diamond artwork: one fixed gem above, two choices below. */
+.gems.three{width:min(1050px,95%);grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));column-gap:clamp(16px,3vw,42px);row-gap:clamp(5px,1vh,16px);align-items:center;justify-items:center;margin:4px auto 8px}
+.gems.three>div{width:100%;height:100%;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gems.three>div:first-child{grid-column:1 / -1;width:min(480px,100%)}
+.gems.three .gem{width:100%;height:100%;min-height:120px;max-height:250px;flex:1}
+.gems.three .gem-name{font-size:clamp(40px,4.6vw,68px)}
+@media(max-width:740px){.gems.three{width:100%;column-gap:8px;row-gap:6px;min-height:380px}.gems.three>div:first-child{width:min(360px,90%)}.gems.three .gem{min-height:125px}.gems.three .gem-name{font-size:clamp(28px,6vw,50px)}.gems.three .check{right:6px;top:2px;width:30px;height:30px;font-size:20px}}
