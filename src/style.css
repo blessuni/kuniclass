@@ -127,3 +127,12 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 .gems.three .gem{width:100%;height:100%;min-height:120px;max-height:250px;flex:1}
 .gems.three .gem-name{font-size:clamp(40px,4.6vw,68px)}
 @media(max-width:740px){.gems.three{width:100%;column-gap:8px;row-gap:6px;min-height:380px}.gems.three>div:first-child{width:min(360px,90%)}.gems.three .gem{min-height:125px}.gems.three .gem-name{font-size:clamp(28px,6vw,50px)}.gems.three .check{right:6px;top:2px;width:30px;height:30px;font-size:20px}}
+
+/* Padlet shortcut in the photo upload screen */
+.photo-screen .upload-footer{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px}
+.photo-screen .upload-footer .padlet-button{text-decoration:none;background:#fff8e9;color:#744b18;border:3px solid #e8b966;box-shadow:0 5px 0 #e9d6a9;font-size:clamp(20px,2.1vw,28px);min-height:92px;padding:10px 20px;border-radius:20px;white-space:nowrap}
+.photo-screen .upload-footer .canva-button{font-size:clamp(20px,2.1vw,28px);min-height:92px}
+@media(max-width:699px){.photo-screen .upload-footer{flex-direction:column}.photo-screen .upload-footer .padlet-button,.photo-screen .upload-footer .canva-button{width:100%;min-height:72px}}
+
+/* 10/12: 교사용 역할 순서 선택 + Canva 다음 패들렛 업로드 */
+.role-start-picker{max-width:800px;margin:16px auto;padding:16px;border:2px solid #e6d9f3;border-radius:22px;background:#fffafc;text-align:center}.role-start-options{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:12px auto}.role-start-option{border:2px solid #d5bddf;border-radius:16px;padding:10px 16px;background:white;font-weight:800;font-size:20px;cursor:pointer}.role-start-option.chosen{background:#6944b5;color:white;border-color:#6944b5}.role-start-picker p{font-size:15px;color:#63516a}.photo-screen .upload-footer{display:flex;flex-direction:column;align-items:center;gap:16px}.photo-screen .padlet-next-button,.photo-screen .padlet-button{border-radius:20px;padding:16px 24px;min-height:76px;font-size:clamp(20px,2vw,28px);text-decoration:none;max-width:95%;white-space:normal;text-align:center}.photo-screen .padlet-button{background:#fff0c7;color:#694318;border:3px solid #e1b257}.photo-screen .padlet-next-button{background:#f2e9ff;color:#593393;border:3px solid #b89be4}.padlet-screen .question{text-align:center}
