@@ -163,3 +163,13 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 .leader-finish-note .score-tablet-picture{min-width:70px;min-height:70px}
 .score-diamond{display:block;width:80%;height:70%;margin:auto;clip-path:polygon(20% 5%,80% 5%,100% 36%,50% 100%,0 36%);background:conic-gradient(from 15deg at 50% 38%,#f6f1fc 0 18%,#a6a1b5 18% 33%,#ded7ed 33% 52%,#b9b0c9 52% 69%,#fff 69% 84%,#c2b7d0 84%);font-size:0!important}
 .diamond-score-button.selected .score-diamond{background:conic-gradient(from 15deg at 50% 38%,#efe1ff 0 18%,#6c43c0 18% 33%,#b48cff 33% 52%,#7041bd 52% 69%,#d6b6ff 69% 84%,#9a65ea 84%)}
+
+/* 간결화: 세 마음보석과 글자 크기를 동일하게 표시 */
+.gems.three{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:12px;width:min(1080px,98%)}
+.gems.three>div,.gems.three>div:first-child{grid-column:auto;width:100%;height:100%}
+.gems.three .gem{width:100%;min-height:150px;max-height:260px}
+.gems.three .gem-name{font-size:clamp(32px,3.6vw,52px)}
+.gem-option-label{font-size:clamp(17px,1.6vw,22px);font-weight:800;text-align:center;white-space:nowrap;margin-top:6px}
+.discussion-card .discussion-check{padding:8px 12px;margin-top:5px;min-height:45px}
+.discussion-card .discussion-check b{font-size:clamp(17px,1.8vw,23px)}
+@media(max-width:740px){.gems.three{gap:5px;min-height:270px}.gems.three .gem{min-height:120px}.gems.three .gem-name{font-size:clamp(22px,4.4vw,34px)}.gem-option-label{font-size:12px;white-space:normal}}
