@@ -203,3 +203,12 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 .gem-option{background:#fff;border:3px solid #d9e3f1;border-radius:23px;padding:7px;box-shadow:0 4px 0 #e5eaf2}
 .gem-option:has(.gem.picked){border-color:#386caa;background:#f0f8ff}
 @media(max-width:740px){.role .role-description{font-size:13px;min-height:30px}.gem-option{padding:3px;border-width:2px}}
+
+/* 요청 수정: 두 번째 보석의 카드 테두리 제거 및 세 보석 동일 크기 */
+.gem-select-layout{--select-gem-width:clamp(165px,22vw,235px);--select-gem-height:clamp(118px,19vh,170px)}
+.gem-select-layout .gem-fixed .gem,.gem-select-layout .gem-option .gem{width:var(--select-gem-width);height:var(--select-gem-height);min-height:0;max-height:none;flex:0 0 auto}
+.gem-select-layout .gem-option-grid{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,30px);height:auto;width:100%}
+.gem-select-layout .gem-option{border:0;background:transparent;box-shadow:none;padding:0;border-radius:0;flex:0 0 auto;align-items:center}
+.gem-select-layout .gem-option:has(.gem.picked){border:0;background:transparent}
+.gem-select-layout .gem-name{font-size:clamp(29px,3.4vw,46px)}
+@media(max-width:740px){.gem-select-layout{--select-gem-width:clamp(135px,34vw,190px);--select-gem-height:clamp(100px,17vh,130px)}.gem-select-layout .gem-name{font-size:clamp(27px,5vw,38px)}}
