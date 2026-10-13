@@ -18,9 +18,39 @@ const practiceLink='https://diamond26.netlify.app';
 const lessonPlanLink='https://drive.google.com/file/d/1OfAc8TrmFh7VWQDD-wTjOYcXI8dv6KMK/view?usp=drive_link';
 const appIcon=(name:'camera'|'gallery'|'canva',cls='')=><img className={'real-app-icon '+cls} src={'/app-icons/'+name+'.png'} alt={{camera:'카메라 앱 아이콘',gallery:'갤러리 앱 아이콘',canva:'Canva 앱 아이콘'}[name]}/>;
 type RecordState={group:number;selected:string[];done:string[];screen:string;extra:string|null;pending?:string|null;role?:number;canva?:boolean;uploaded?:boolean;leaderConfirmed?:boolean;roleStart?:number;reviewing?:boolean;discussionChecks?:Record<string,{place:boolean;pose:boolean}>};
-const playClickSound=()=>{try{const A=(window.AudioContext||(window as any).webkitAudioContext);if(!A)return;const c=new A(),o=c.createOscillator(),g=c.createGain(),n=c.currentTime;o.type='sine';o.frequency.value=660;g.gain.setValueAtTime(.045,n);g.gain.exponentialRampToValueAtTime(.0001,n+.08);o.connect(g);g.connect(c.destination);o.start(n);o.stop(n+.09);setTimeout(()=>c.close(),180)}catch{}};
-const playPromiseSound=()=>{try{const A=(window.AudioContext||(window as any).webkitAudioContext);if(!A)return;const c=new A(),o=c.createOscillator(),g=c.createGain(),n=c.currentTime;o.type='sine';o.frequency.value=880;g.gain.setValueAtTime(.09,n);g.gain.exponentialRampToValueAtTime(.0001,n+.16);o.connect(g);g.connect(c.destination);o.start(n);o.stop(n+.18);setTimeout(()=>c.close(),300)}catch{}};
-const playCompleteSound=()=>{try{const A=(window.AudioContext||(window as any).webkitAudioContext);if(!A)return;const c=new A();const now=c.currentTime;[523,659,784,1047].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0.0001,now+i*.09);g.gain.exponentialRampToValueAtTime(.12,now+i*.09+.015);g.gain.exponentialRampToValueAtTime(.0001,now+i*.09+.22);o.connect(g);g.connect(c.destination);o.start(now+i*.09);o.stop(now+i*.09+.24)});setTimeout(()=>c.close(),1200)}catch{}};
+// 버튼 클릭 시 브라우저에서 직접 생성하는 효과음 (별도 오디오 파일/네트워크 불필요)
+type SoundKind='click'|'complete'|'camera'|'gem'|'applause';
+let sharedAudioContext:AudioContext|null=null;
+const playSound=(kind:SoundKind='click')=>{
+ try{
+  const A=window.AudioContext||(window as any).webkitAudioContext;
+  if(!A)return;
+  const c=sharedAudioContext??(sharedAudioContext=new A());
+  if(c.state==='suspended')void c.resume();
+  const now=c.currentTime;
+  const tone=(hz:number,delay:number,duration:number,volume:number,wave:OscillatorType='sine')=>{
+   const o=c.createOscillator(),g=c.createGain(),at=now+delay;
+   o.type=wave;o.frequency.setValueAtTime(hz,at);
+   g.gain.setValueAtTime(.0001,at);
+   g.gain.exponentialRampToValueAtTime(volume,at+.008);
+   g.gain.exponentialRampToValueAtTime(.0001,at+duration);
+   o.connect(g);g.connect(c.destination);o.start(at);o.stop(at+duration+.015);
+  };
+  if(kind==='click')tone(660,0,.08,.065);
+  if(kind==='gem'){tone(659,0,.12,.09);tone(988,.10,.19,.10)}
+  if(kind==='camera'){tone(380,0,.035,.10,'square');tone(250,.055,.05,.07,'triangle')}
+  if(kind==='complete'){tone(587,0,.13,.09);tone(880,.13,.20,.10)}
+  if(kind==='applause'){
+   [0,.11,.22,.33,.44,.55].forEach((d,i)=>{
+    tone(200+i*24,d,.04,.045,'triangle');tone(300+i*21,d+.025,.045,.04,'square');
+   });
+   tone(784,.64,.19,.10);tone(1047,.75,.24,.11);
+  }
+ }catch{/* 기기의 무음/브라우저 오디오 제한 시 앱은 정상 동작 */}
+};
+const playClickSound=()=>playSound('click');
+const playPromiseSound=()=>playSound('complete');
+const playCompleteSound=()=>playSound('applause');
 const empty=(group=0):RecordState=>({group,selected:[],done:[],screen:'select',extra:null});
 const key='diamond-maeum-v1';
 const colors=['#e4424c','#e8bc23','#2fa56b','#3889db','#975aca'];
@@ -45,8 +75,20 @@ export default function Home(){
  const checkReset=async()=>{const response=await fetch('/api/progress',{cache:'no-store'});if(!response.ok)throw Error('reset-check');const x=await response.json();return applyReset(String(x.resetVersion??'0'))};
  useEffect(()=>{if(ready)checkReset().catch(()=>setSyncError(true))},[ready]);
  const sendProgress=()=>{const payload=latestPayload.current;writeQueue.current=writeQueue.current.catch(()=>{}).then(async()=>{try{if(await checkReset())return;if(!payload||String(payload.resetVersion)!==resetVersion.current)return;const response=await fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(response.status===409){const x=await response.json();applyReset(x.resetVersion);return}if(!response.ok)throw Error('save');setSyncError(false)}catch{setSyncError(true)}})};
- useEffect(()=>{if(!ready)return;const clickSound=(e:MouseEvent)=>{const t=e.target as HTMLElement;if(t.closest('button,a.primary'))playClickSound()};document.addEventListener('click',clickSound);return()=>document.removeEventListener('click',clickSound)},[ready]);
- useEffect(()=>{if(!ready)return;const returned=()=>{try{if(document.visibilityState!=='visible')return;if(sessionStorage.getItem('diamond-canva-away')==='1'){sessionStorage.removeItem('diamond-canva-away');setS(p=>p.group&&p.canva?{...p,screen:'complete'}:p);setTimeout(playCompleteSound,80)}}catch{}};window.addEventListener('pageshow',returned);document.addEventListener('visibilitychange',returned);returned();return()=>{window.removeEventListener('pageshow',returned);document.removeEventListener('visibilitychange',returned)}},[ready]);
+ useEffect(()=>{if(!ready)return;const clickSound=(e:MouseEvent)=>{
+ const target=e.target;
+ if(!(target instanceof Element))return;
+ const button=target.closest('button:not(:disabled),a');
+ if(!button)return;
+ // 기존 흐름은 그대로 두고 사용자 클릭에만 짧은 효과음을 재생
+ const label=(button.textContent||'').trim();
+ if(button.closest('.gems')||button.classList.contains('gem'))playSound('gem');
+ else if(button.classList.contains('done')||label.includes('사진을 찍')||label.includes('촬영'))playSound('camera');
+ else if(label.includes('모두 표현했어요')||label.includes('다 했어요')||label.includes('선택했어요'))playSound('complete');
+ else if(label.includes('활동을 마쳤')||label.includes('모든 모둠의 활동'))playSound('applause');
+ else playClickSound();
+};document.addEventListener('click',clickSound);return()=>document.removeEventListener('click',clickSound)},[ready]);
+ useEffect(()=>{if(!ready)return;const returned=()=>{try{if(document.visibilityState!=='visible')return;if(sessionStorage.getItem('diamond-canva-away')==='1'){sessionStorage.removeItem('diamond-canva-away');setS(p=>p.group&&p.canva?{...p,screen:'complete'}:p);}}catch{}};window.addEventListener('pageshow',returned);document.addEventListener('visibilitychange',returned);returned();return()=>{window.removeEventListener('pageshow',returned);document.removeEventListener('visibilitychange',returned)}},[ready]);
  useEffect(()=>{if(!ready)return;if(s.group)records.current[s.group]=s;try{localStorage.setItem('maeum-group-records',JSON.stringify(records.current));if(s.group)localStorage.setItem(key,JSON.stringify(s));}catch{setStorageIssue(true)}if(!s.group)return;latestPayload.current={device:device.current,group:s.group,record:s,resetVersion:resetVersion.current,revision:Date.now()};const timer=setTimeout(sendProgress,300);return()=>clearTimeout(timer)},[s,ready]);
  useEffect(()=>{if(!ready)return;const timer=setInterval(sendProgress,10000);const retry=()=>sendProgress();window.addEventListener('online',retry);return()=>{clearInterval(timer);window.removeEventListener('online',retry)}},[ready]);
  const refreshProgress=async()=>{try{const response=await fetch('/api/progress',{cache:'no-store'});if(!response.ok)throw Error();const x=await response.json();const incomingVersion=String(x.resetVersion??'0');if(Number(incomingVersion.split('-')[0])<Number(resetVersion.current.split('-')[0]))return;applyReset(incomingVersion);setRows(x.rows);setSyncError(false)}catch{setSyncError(true);setRows(previous=>{const local=Object.values(records.current).map(record=>({device_id:device.current,group_id:record.group,record_json:JSON.stringify(record),stage:stage(record),local:true}));return [...previous.filter(row=>!local.some(x=>x.device_id===row.device_id&&x.group_id===row.group_id)),...local]})}};
@@ -72,7 +114,7 @@ export default function Home(){
  {s.screen==='confirm'&&<section><h1>✨ 우리가 고른 마음보석 ✨</h1><div className="gems two">{s.selected.map((v,i)=>gem(v,i,true,()=>go('select')))}</div><footer><button className="secondary" onClick={()=>go('select')}>{picture(2,"button-picture")} 다시 골라요</button><button className="primary" onClick={()=>go('roles')}>{picture(7,"button-picture")} 우리 역할 보기</button></footer></section>}
  {s.screen==='roles'&&<section><h1>👫 우리 모둠 역할</h1><div className="roles">{roles.map((r,i)=>{const checked=!!s.roleChecks?.[i];return <button key={r[1]} className={'role '+(checked?'active checked':'')} onClick={()=>{setRole(i);setS(p=>{const checks=[...(p.roleChecks||[false,false,false,false,false])];checks[i]=!checks[i];return {...p,role:i,roleChecks:checks}})}} aria-pressed={checked}>{i===2||i===3?<span className="role-visuals">{picture(rolePictures[i],"role-picture")}{appIcon(i===2?'camera':'canva','role-app-icon')}</span>:picture(rolePictures[i],"role-picture")}<span className="role-name">{roleNumbers[(i+roleStart-1)%5]} {r[1]}</span><span className="role-checkmark">{checked?'✓':''}</span></button>})}</div><p className="role-description">{role>=0?roles[role][2]:roles[0][2]}</p><p className="everyone">{picture(7,"everyone-picture")}<span>생각하고 표현하기는<br/>우리 모두 함께해요!</span></p><footer><button className="secondary" onClick={()=>go('confirm')}>{picture(2,"button-picture")} 고른 보석 보기</button><button className="primary" disabled={!roles.every((_,i)=>s.roleChecks?.[i])} onClick={()=>go(s.done.length&&!s.reviewing?'activity':'discussion')}>{picture(s.done.length?3:1,"button-picture")} {s.done.length&&!s.reviewing?'이어서 표현해요':'역할 모두 확인했어요'}</button></footer></section>}
  {s.screen==='discussion'&&<section className="discussion-screen"><h1>{roleNumbers[roleStart%5]} 감독이 작전회의를 확인해요</h1><p className="question">친구들과 의논한 내용을 하나씩 확인하고 체크해요.</p><div className="discussion-gems">{s.selected.map((v,i)=>{const checks=s.discussionChecks?.[v]||{place:false,pose:false};const toggle=(kind:'place'|'pose')=>setS(p=>({...p,discussionChecks:{...(p.discussionChecks||{}),[v]:{place:p.discussionChecks?.[v]?.place||false,pose:p.discussionChecks?.[v]?.pose||false,[kind]:!(p.discussionChecks?.[v]?.[kind]||false)}}}));return <div className="discussion-card" key={v}>{gem(v,i,false)}<button className={'discussion-check '+(checks.place?'checked':'')} onClick={()=>toggle('place')} aria-pressed={checks.place}><span className="check-box">{checks.place?'✓':'□'}</span><span><b>어디에서</b> 표현할지 의논했어요</span></button><button className={'discussion-check '+(checks.pose?'checked':'')} onClick={()=>toggle('pose')} aria-pressed={checks.pose}><span className="check-box">{checks.pose?'✓':'□'}</span><span><b>어떤 모습으로</b> 표현할지 의논했어요</span></button></div>})}</div><div className="discussion-reminder">{picture(7,'discussion-picture')}<span>두 마음보석의 두 가지 항목을 모두 확인하면<br/>촬영하러 출발할 수 있어요!</span></div><footer className="guided-footer"><button className="primary" disabled={!s.selected.every(v=>s.discussionChecks?.[v]?.place&&s.discussionChecks?.[v]?.pose)} onClick={()=>go('promise')}>{picture(3,'button-picture')} 모두 확인했어요!</button></footer></section>}
- {s.screen==='promise'&&<section className="promise-screen"><h1>💎 우리의 약속!</h1><p className="question">친구들과 함께 크게 외쳐요!</p><div className="promise-chant">{[['🤝','모두 함께!'],['😊','즐겁게!'],['🛡️','안전하게!']].map((item,i)=>{const checked=!!s.promiseChecks?.[i];return <button key={item[1]} className={checked?'checked':''} aria-pressed={checked} onClick={()=>{playPromiseSound();setS(p=>{const checks=[...(p.promiseChecks||[false,false,false])];checks[i]=!checks[i];return {...p,promiseChecks:checks}})}}>{item[0]} <b>{item[1]}</b><span>{checked?'✓':''}</span></button>})}</div><footer className="guided-footer"><button className="primary" disabled={![0,1,2].every(i=>s.promiseChecks?.[i])} onClick={()=>go('activity')}>{picture(3,'button-picture')} 약속 완료! 촬영하러 출발</button></footer></section>}
+ {s.screen==='promise'&&<section className="promise-screen"><h1>💎 우리의 약속!</h1><p className="question">친구들과 함께 크게 외쳐요!</p><div className="promise-chant">{[['🤝','모두 함께!'],['😊','즐겁게!'],['🛡️','안전하게!']].map((item,i)=>{const checked=!!s.promiseChecks?.[i];return <button key={item[1]} className={checked?'checked':''} aria-pressed={checked} onClick={()=>{setS(p=>{const checks=[...(p.promiseChecks||[false,false,false])];checks[i]=!checks[i];return {...p,promiseChecks:checks}})}}>{item[0]} <b>{item[1]}</b><span>{checked?'✓':''}</span></button>})}</div><footer className="guided-footer"><button className="primary" disabled={![0,1,2].every(i=>s.promiseChecks?.[i])} onClick={()=>go('activity')}>{picture(3,'button-picture')} 약속 완료! 촬영하러 출발</button></footer></section>}
  {s.screen==='activity'&&<section><h1>💎 우리가 고른 마음보석</h1><div className="picture-guide">{appIcon('camera')}{picture(3)}<span>사진을 찍어요</span>{picture(4)}<span>다 찍으면 눌러요</span></div><div className={'activities count'+s.selected.length}>{s.selected.map((v,i)=><div className="activity" key={v}>{gem(v,i,s.done.includes(v),()=>finishGem(v))}<button className={'done '+(s.done.includes(v)?'completed':'')} onClick={()=>finishGem(v)}>{picture(4,'button-picture')}{s.done.includes(v)?'✓ 이 마음보석 다 했어요':'이 마음보석 다 했어요 ✓'}</button></div>)}</div><p className="completion">친구들과 함께 생각하고 표현해요.</p><footer>{all&&<button className="primary" onClick={()=>go('captured')}>{picture(4,'button-picture')} 모두 표현했어요</button>}</footer></section>}
 
  {s.screen==='captured'&&all&&<section><h1>{s.selected.length===2?'두 마음보석을 모두 표현했어요! ✨✨':'고른 마음보석을 모두 표현했어요! ✨'}</h1><div className="gems two">{s.selected.map((v,i)=>gem(v,i,true,()=>finishGem(v)))}</div><footer><button className="primary" onClick={()=>go('return')}>{picture(5,'button-picture')} 모둠 자리로 돌아가요</button></footer></section>}
