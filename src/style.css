@@ -247,3 +247,24 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .teacher-gem-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));height:clamp(260px,49vh,460px);width:min(750px,100%)}
 .teacher-gem-grid .gem-option .gem{height:100%;width:100%}
 @media(max-width:740px){.teacher-gem-grid{height:clamp(260px,45vh,370px)}}
+
+/* 교사용 전자칠판 화면 */
+.teacher-choice-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);width:min(100%,920px);margin:clamp(12px,2vh,24px) auto 0}
+.teacher-choice-row .group-choice{width:100%;min-height:clamp(78px,12vh,115px);font-size:clamp(24px,2.5vw,38px)}
+.teacher-choice{background:#eee6ff!important;border-color:#a38bd8!important;color:#4c3579!important}
+.observer-choice{background:#f4e9fa!important;border-color:#bd99d4!important;color:#634475!important}
+.teacher-timer-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(15px,3vh,30px)}
+.teacher-timer{font-size:clamp(110px,19vw,310px);font-weight:950;line-height:1.05;color:#263e65;font-variant-numeric:tabular-nums;letter-spacing:.015em;text-shadow:0 5px 0 #dce6f5}
+.teacher-timer-controls{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:clamp(22px,2vw,30px);font-weight:800}
+.teacher-timer-controls select{font:inherit;padding:12px 18px;border:2px solid #a6bad8;border-radius:18px;background:white;color:#253b5d}
+.teacher-timer-controls button{font-size:clamp(22px,2vw,29px);padding:16px 32px;min-height:65px}
+@media(max-height:700px){.teacher-timer{font-size:clamp(100px,17vh,170px)}.teacher-choice-row .group-choice{min-height:70px}}
+.group6{--accent:#7051a3;--soft:#efe6ff}
+.group-grid .group-choice:last-child{grid-column:auto;padding:22px 20px;font-size:inherit;border-style:solid}
+.setup:has(.teacher-choice-row){justify-content:flex-start;overflow-y:auto;padding-top:clamp(4px,1vh,16px)}
+.setup:has(.teacher-choice-row) .group-grid{width:min(900px,100%);gap:clamp(8px,1.2vw,16px);margin-top:10px}
+.setup:has(.teacher-choice-row) .group-grid .group-choice{min-height:clamp(68px,11vh,105px);padding:8px 14px;font-size:clamp(24px,2.7vw,35px)}
+.setup:has(.teacher-choice-row) .group-grid .group-art{width:clamp(45px,6vh,75px);height:clamp(45px,6vh,75px)}
+.setup:has(.teacher-choice-row) .teacher-choice-row{margin-top:12px}
+.setup:has(.teacher-choice-row) .observer-resources{margin-top:12px}
+@media(max-width:699px){.teacher-choice-row{width:100%;gap:8px}.teacher-choice-row .group-choice{font-size:19px;min-height:65px;padding:10px 5px}}
