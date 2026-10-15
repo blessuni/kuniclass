@@ -293,3 +293,7 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .group6 section:has(> .roles)>.roles{margin-top:clamp(22px,6vh,65px)!important;margin-bottom:0!important}
 .group6 section:has(> .roles) footer{margin-top:clamp(16px,3vh,30px)!important}
 .group6 .gem-select-layout{justify-content:center}
+
+/* 공개수업용: 유아 모둠 4개와 선생님용 모두 역할 카드를 위쪽에 배치 */
+.app.has-operator section:has(> .roles) > .roles{margin-top:clamp(18px,5vh,55px)!important;margin-bottom:0!important}
+.app.has-operator section:has(> .roles) > footer{margin-top:clamp(14px,3vh,28px)!important}
