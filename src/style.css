@@ -288,3 +288,8 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .teacher-select-timer .teacher-timer-panel{margin:0 auto;padding:12px 20px}
 .teacher-select-timer .teacher-timer{font-size:clamp(52px,7vw,100px)}
 @media(max-height:750px){.group6 .gem-select-screen{overflow-y:auto;justify-content:flex-start}.teacher-select-timer .teacher-timer-panel{padding:8px 14px}.teacher-select-timer .teacher-timer{font-size:52px}.teacher-select-timer .teacher-timer-controls button{padding:8px 12px;min-height:45px}}
+
+/* 공개수업 역할 카드가 화면 아래로 쏠리지 않도록 상단 배치 */
+.group6 section:has(> .roles)>.roles{margin-top:clamp(22px,6vh,65px)!important;margin-bottom:0!important}
+.group6 section:has(> .roles) footer{margin-top:clamp(16px,3vh,30px)!important}
+.group6 .gem-select-layout{justify-content:center}
