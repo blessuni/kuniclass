@@ -309,3 +309,10 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .photo-dashboard .photo-thumbnails{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0;max-height:260px;overflow-y:auto}
 .photo-dashboard .photo-thumbnails img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px}
 .photo-screen input[type=file]{max-width:95%;padding:14px;border:2px dashed #9a84c4;border-radius:12px;background:white}
+
+/* 모둠 이름이 표시되는 작은 사진 미리보기 */
+.photo-dashboard .photo-thumbnails{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;max-height:250px}
+.photo-dashboard .photo-thumbnail-card{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.photo-dashboard .photo-thumbnail-card a{display:block;width:100%;max-width:112px}
+.photo-dashboard .photo-thumbnail-card img{width:100%;height:76px;aspect-ratio:auto;object-fit:cover;border-radius:8px}
+.photo-dashboard .photo-thumbnail-card span{font-size:12px;font-weight:700;line-height:1.25;color:#344466;white-space:nowrap}
