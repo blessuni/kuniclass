@@ -362,3 +362,5 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .gem-result-card .gem-meter{height:54px}
 .diamond-score-button .score-diamond{clip-path:polygon(50% 3%,96% 37%,78% 96%,22% 96%,4% 37%)}
 @media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-start-only{padding:24px 5px}.gem-result-grid{gap:7px 8px;padding:0 7%}}
+
+.gem-average-note,.gem-exact-score{color:#ffeaa0!important;font-size:clamp(15px,1.7vw,20px);text-align:center;margin:10px 0}
