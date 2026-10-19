@@ -343,3 +343,22 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .gem-result-screen footer{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
 .diamond-score-screen:has(.diamond-score-button:nth-child(10)) .diamond-score-buttons{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));max-width:650px;margin-inline:auto;gap:10px}
 @media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-result-grid{gap:5px 7px;padding:0 4%}.gem-result-screen{padding:8px}}
+
+/* 공개수업: 결과 대기 화면은 중앙 시작 버튼만 표시 */
+.gem-result-screen{width:100%;max-width:100%;padding:12px 14px 24px;overflow:hidden}
+.gem-result-card{width:min(100%,780px);max-width:100%;padding:20px 26px}
+.gem-start-only{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:28px 10px 35px}
+.pentagon-gem{display:inline-block;flex:none;overflow:visible;color:#ffd700}
+.teacher-diamond-art{width:1.2em;height:1.2em;filter:drop-shadow(0 2px 2px #27649e);transform:none;color:#58b9f8}
+.teacher-choice .teacher-diamond-art{width:1.3em;height:1.3em;margin-right:10px}
+.gem-start-symbol{width:clamp(110px,17vw,180px);height:clamp(110px,17vw,180px);filter:drop-shadow(0 0 22px #ffda4788);animation:gem-twinkle 1.5s ease-in-out infinite alternate}
+.gem-start-button{border:3px solid #ffe06b;border-radius:999px;background:#ffd437;color:#151e42;font-family:inherit;font-size:clamp(25px,3.3vw,40px);padding:18px 32px;min-width:min(90%,390px);display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:0 5px 22px #ffcd4777;cursor:pointer}
+.gem-start-button:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+.gem-button-symbol{width:1.1em;height:1.1em;color:#e6a900}
+.gem-result-gem{width:clamp(18px,2.5vw,28px);height:clamp(18px,2.5vw,28px);color:#34415f;filter:none}
+.gem-result-gem.lit{color:#ffd700;filter:drop-shadow(0 0 6px #ffd70099)}
+.gem-result-grid{gap:8px 12px;max-width:550px;margin:18px auto;padding:0 9%}
+.gem-inline-symbol{width:1em;height:1em;vertical-align:-.13em}
+.gem-result-card .gem-meter{height:54px}
+.diamond-score-button .score-diamond{clip-path:polygon(50% 3%,96% 37%,78% 96%,22% 96%,4% 37%)}
+@media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-start-only{padding:24px 5px}.gem-result-grid{gap:7px 8px;padding:0 7%}}
