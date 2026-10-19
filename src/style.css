@@ -316,3 +316,30 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 .photo-dashboard .photo-thumbnail-card a{display:block;width:100%;max-width:112px}
 .photo-dashboard .photo-thumbnail-card img{width:100%;height:76px;aspect-ratio:auto;object-fit:cover;border-radius:8px}
 .photo-dashboard .photo-thumbnail-card span{font-size:12px;font-weight:700;line-height:1.25;color:#344466;white-space:nowrap}
+
+/* 공개수업용 마음보석 평가 결과 */
+.gem-result-screen{box-sizing:border-box;width:100%;min-width:0;display:flex;flex-direction:column;align-items:center;gap:16px;padding:12px 14px 30px}
+.gem-result-card{box-sizing:border-box;background:#141b3c;color:#fff;border-radius:25px;width:min(100%,850px);padding:22px 26px;text-align:center}
+.gem-result-card h1{color:#fff1b5;font-size:clamp(23px,2.8vw,34px);margin:0 0 8px}
+.gem-result-card p{color:#ccd5f2;margin:8px 0}
+.gem-readiness{margin:20px auto;max-width:680px}
+.gem-readiness h2{color:#fff1b5}
+.gem-readiness-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px auto}
+.gem-readiness-item{background:#303a60;border-radius:12px;padding:12px 8px;display:flex;flex-direction:column;gap:7px}
+.gem-readiness-item span{color:#ffe083}
+.gem-readiness .primary,.gem-readiness .secondary{margin:8px;max-width:100%}
+.gem-waiting{font-size:14px}
+.gem-result-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 10px;margin:20px auto;padding:0 8%;max-width:640px;justify-items:center}
+.gem-result-gem{display:block;color:#34415f;font-size:clamp(20px,3.1vw,32px);line-height:1.35;transition:color .18s,transform .18s}
+.gem-result-gem.lit{color:#ffd700;animation:gem-pop .28s ease-out,gem-twinkle 1.5s ease-in-out infinite alternate;text-shadow:0 0 9px #ffd700aa}
+@keyframes gem-pop{0%{transform:scale(.7)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes gem-twinkle{from{text-shadow:0 0 4px #ffd70088}to{text-shadow:0 0 17px #fff0a0}}
+.gem-meter-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:clamp(17px,2.3vw,23px);margin:16px 0 9px}
+.gem-meter-label strong:last-child{color:#ffd700}
+.gem-meter{height:54px;background:#354363;border-radius:999px;overflow:hidden}
+.gem-meter-fill{height:100%;background:#ffd700;border-radius:999px;transition:width .24s linear}
+.gem-reward{padding:14px 0 3px;animation:gem-pop .5s ease-out}
+.gem-reward h2{color:#fff1b5;margin:8px 0;font-size:clamp(20px,2.6vw,29px)}
+.gem-result-screen footer{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.diamond-score-screen:has(.diamond-score-button:nth-child(10)) .diamond-score-buttons{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));max-width:650px;margin-inline:auto;gap:10px}
+@media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-result-grid{gap:5px 7px;padding:0 4%}.gem-result-screen{padding:8px}}
