@@ -4,7 +4,7 @@ export function normalizeFlow(r){const done=[...new Set(r.done.filter(v=>r.selec
  if(x.screen==='captured'&&capturedAll(x))x.screen='return';
  if(x.screen==='finish')x={...x,screen:x.uploaded?'upload':'return',canva:!!x.uploaded||!!x.canva};
  if(x.screen==='extra')x={...x,screen:capturedAll(x)?'return':'activity',extra:null};
- if(!capturedAll(x)&&['captured','return','photos','send','upload','padlet','score','complete'].includes(x.screen))x={...x,screen:done.length?'oneDone':'activity',canva:false};
+ if(!capturedAll(x)&&['captured','return','photos','send','upload','padlet','score','complete'].includes(x.screen)&&!(Number.isInteger(x.score)&&x.score>=1&&['score','complete'].includes(x.screen)))x={...x,screen:done.length?'oneDone':'activity',canva:false};
  if(['discussion','director','promise'].includes(x.screen)&&done.length&&!x.reviewing)x.screen=capturedAll(x)?'return':'oneDone';
  if(['discussion','director','promise'].includes(x.screen)&&x.selected.length!==2)x.screen='select';
  if(x.screen==='oneDone'&&capturedAll(x)&&!x.reviewing)x.screen='return';
