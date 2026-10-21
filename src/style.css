@@ -364,3 +364,17 @@ section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
 @media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-start-only{padding:24px 5px}.gem-result-grid{gap:7px 8px;padding:0 7%}}
 
 .gem-average-note,.gem-exact-score{color:#ffeaa0!important;font-size:clamp(15px,1.7vw,20px);text-align:center;margin:10px 0}
+
+/* Teacher-only discussion countdown beside the sparkle-hands guide. */
+.discussion-screen .guided-footer{position:relative}
+.discussion-screen .guided-footer:has(.discussion-timer-panel) .sparkle-hands{margin-right:0;margin-left:0}
+.discussion-screen .guided-footer:has(.discussion-timer-panel){display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,auto);align-items:center;justify-items:center;gap:8px 18px}
+.discussion-screen .guided-footer:has(.discussion-timer-panel)>.primary{grid-column:1/-1}
+.discussion-timer-panel{display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 12px;border:2px solid #a9c7ec;border-radius:16px;background:#f1f8ff;color:#284e7b;min-width:210px}
+.discussion-timer-time{font-size:clamp(25px,2.8vw,39px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.discussion-timer-buttons{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;font-size:14px;font-weight:800}
+.discussion-timer-buttons select,.discussion-timer-buttons button{font:inherit;border:1px solid #8eaed4;border-radius:8px;padding:5px 7px;background:white;color:#284e7b;cursor:pointer}
+.discussion-timer-buttons button:first-of-type{background:#377bd1;color:white}
+.discussion-timer-buttons button:disabled{opacity:.5;cursor:not-allowed}
+.discussion-timer-done{color:#bc3154;font-size:15px}
+@media(max-width:560px){.discussion-screen .guided-footer:has(.discussion-timer-panel){grid-template-columns:1fr;gap:4px}.discussion-screen .guided-footer:has(.discussion-timer-panel)>.primary{grid-column:1}}
