@@ -146,235 +146,111 @@ body,button{font-family:'진주둥근글씨','Malgun Gothic','Apple SD Gothic Ne
 .padlet-screen .padlet-button span{font-weight:900}
 @media(max-width:699px){.padlet-screen .padlet-app-icon{width:76px;height:76px}.padlet-screen .padlet-button{min-width:0;width:95%}}
 
-/* 공개수업: 패들렛(완성이) → 모둠장 다이아몬드 평가 → 박수 */
-.diamond-score-screen{text-align:center;padding:24px 18px 40px}
-.diamond-score-screen h1{font-size:clamp(30px,3.6vw,52px)}
-.leader-score-guide{display:flex;align-items:center;justify-content:center;gap:22px;margin:24px auto 8px;max-width:850px}
-.leader-score-guide p{font-size:clamp(19px,2.3vw,30px);font-weight:700}
-.score-tablet-picture{display:inline-block;min-width:120px;min-height:110px}
-.diamond-score-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(8px,1.5vw,24px);margin:32px auto 16px}
-.diamond-score-button{border:3px solid #b7a6da;background:#fffaf2;border-radius:20px;width:clamp(72px,11vw,135px);height:clamp(90px,12vw,150px);box-shadow:0 6px 0 #e5d6c7;cursor:pointer}
-.score-diamond{font-size:clamp(49px,7vw,100px);line-height:1;color:#d5d0dc;text-shadow:0 3px 0 #a8a2af}
-.diamond-score-button.selected{background:#f1e7ff;border-color:#7c50c2;transform:translateY(-2px)}
-.diamond-score-button.selected .score-diamond{color:#8651d4;text-shadow:0 4px 0 #513089,0 0 14px #b38cff}
-.score-count{font-size:clamp(24px,2.7vw,36px);font-weight:900;color:#7043ac;margin:20px}
-.leader-tablet-picture{display:flex;justify-content:center}
-.leader-finish-note{display:flex;align-items:center;justify-content:center;gap:10px;font-size:24px}
-.leader-finish-note .score-tablet-picture{min-width:70px;min-height:70px}
-.score-diamond{display:block;width:80%;height:70%;margin:auto;clip-path:polygon(20% 5%,80% 5%,100% 36%,50% 100%,0 36%);background:conic-gradient(from 15deg at 50% 38%,#f6f1fc 0 18%,#a6a1b5 18% 33%,#ded7ed 33% 52%,#b9b0c9 52% 69%,#fff 69% 84%,#c2b7d0 84%);font-size:0!important}
-.diamond-score-button.selected .score-diamond{background:conic-gradient(from 15deg at 50% 38%,#efe1ff 0 18%,#6c43c0 18% 33%,#b48cff 33% 52%,#7041bd 52% 69%,#d6b6ff 69% 84%,#9a65ea 84%)}
+.practice-symbol{display:inline-flex;align-items:center;justify-content:center;font-size:clamp(36px,5vw,65px);width:1.1em;height:1.1em;line-height:1;vertical-align:middle}
+.practice-symbol1{color:#e4424c}.practice-symbol2{color:#e8bc23}.practice-symbol3{color:#2fa56b}.practice-symbol4{color:#3889db}
+.score-stars{display:flex;justify-content:center;gap:clamp(5px,1.2vw,18px);margin:45px auto 35px;flex-wrap:wrap}
+.score-star{border:3px solid #edcb6d;border-radius:22px;background:#fff9e9;color:#bdbdbd;font-size:clamp(42px,6vw,86px);width:clamp(65px,10vw,116px);height:clamp(76px,12vw,134px);cursor:pointer}
+.score-star.active{color:#edb82f;background:#fff0bd;box-shadow:0 6px 0 #d7b35d}
 
-/* 간결화: 세 마음보석과 글자 크기를 동일하게 표시 */
-.gems.three{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:12px;width:min(1080px,98%)}
-.gems.three>div,.gems.three>div:first-child{grid-column:auto;width:100%;height:100%}
-.gems.three .gem{width:100%;min-height:150px;max-height:260px}
-.gems.three .gem-name{font-size:clamp(32px,3.6vw,52px)}
-.gem-option-label{font-size:clamp(17px,1.6vw,22px);font-weight:800;text-align:center;white-space:nowrap;margin-top:6px}
-.discussion-card .discussion-check{padding:8px 12px;margin-top:5px;min-height:45px}
-.discussion-card .discussion-check b{font-size:clamp(17px,1.8vw,23px)}
-@media(max-width:740px){.gems.three{gap:5px;min-height:270px}.gems.three .gem{min-height:120px}.gems.three .gem-name{font-size:clamp(22px,4.4vw,34px)}.gem-option-label{font-size:12px;white-space:normal}}
+/* 범용 모둠활동: 네 모둠은 2×2, 선생님 시범은 마지막 전체 폭 */
+.group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.group-grid .group-choice:nth-child(4){grid-column:2;grid-row:2;border-style:solid;font-size:inherit;padding:22px 20px}
+.group-grid .group-choice:nth-child(5){grid-column:1/-1;grid-row:3;background:#f0e1fc;color:#70409a;border:3px dashed #8856b6}
+.group5{--accent:#7f41a6;--soft:#f0e1fc}
+.practice-symbol5{font-size:clamp(36px,5vw,60px)}
+@media(max-width:699px){.group-grid .group-choice:nth-child(4){font-size:25px;padding:18px 5px}.group-grid .group-choice:nth-child(5){font-size:25px;padding:16px}}
 
-/* 2026-10-13 공개수업 수정: 보석 선택 및 유아 친화형 안내 */
-.leader-discover-picture{width:68px;height:68px;flex-shrink:0}
-.role-description{display:block;font-size:clamp(14px,1.45vw,19px);line-height:1.25;color:#43556d;font-weight:700;text-align:center;max-width:100%;white-space:normal}
-.role.checked{min-height:178px}
-.discussion-hint-icon{font-size:clamp(25px,2.5vw,36px);line-height:1;flex:0 0 auto}
-.discussion-check{gap:9px}
-.gem-select-screen{justify-content:space-between}
-.gem-select-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,1.5vh,18px);width:min(920px,100%);flex:1;min-height:0;margin:0 auto}
-.gem-select-caption{font-size:clamp(20px,2.4vw,30px);font-weight:900;color:#334c71;text-align:center;padding:3px 8px}
-.gem-fixed{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,24px);width:100%;min-height:0}
-.gem-fixed .gem{width:clamp(155px,24vw,245px);height:clamp(110px,20vh,170px);flex-shrink:0}
-.gem-options{width:100%;display:flex;flex-direction:column;align-items:center;gap:7px;min-height:0}
-.gem-option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,3vw,34px);width:min(720px,100%);height:clamp(130px,25vh,225px)}
-.gem-option{display:flex;align-items:stretch;justify-content:center;min-width:0;min-height:0}
-.gem-option .gem{width:100%;height:100%;min-height:0}
-.gem-select-layout .gem-name{font-size:clamp(30px,4vw,54px)}
-@media(max-width:740px){
- .gem-fixed{flex-direction:column;gap:4px}
- .gem-fixed .gem{width:clamp(170px,55vw,245px);height:120px}
- .gem-option-grid{gap:8px;height:155px}
- .gem-select-layout .gem-name{font-size:clamp(27px,5vw,40px)}
- .gem-select-caption{font-size:20px}
- .role-description{font-size:13px}
- .discussion-hint-icon{font-size:23px}
+/* 파랑모둠을 다른 색 모둠과 동일한 글씨 크기로 표시 */
+.group-grid .group-choice:nth-child(4){font-size:32px; font-weight:400; padding:22px 20px;}
+@media(max-height:700px) and (min-width:700px){.group-grid .group-choice:nth-child(4){font-size:32px;padding:8px 20px}}
+@media(max-width:699px){.group-grid .group-choice:nth-child(4){font-size:25px;padding:18px 5px}}
+
+/* 가로 태블릿: 작전회의 3항목만 배치하여 확인 버튼이 화면에 들어오도록 */
+.discussion-screen .discussion-check{min-height:48px;padding:7px 12px}
+.discussion-screen .discussion-card{gap:7px}
+@media (orientation:landscape) and (max-height:850px){
+ .discussion-screen .discussion-gems{flex:1;min-height:0;align-items:stretch;margin:6px auto}
+ .discussion-screen .discussion-card{min-height:0;gap:5px}
+ .discussion-screen .discussion-card .gem{min-height:60px;max-height:125px}
+ .discussion-screen .discussion-check{min-height:42px;padding:4px 10px}
+ .discussion-screen .guided-footer{min-height:65px;padding:5px 0}
 }
-.role .role-description{font-size:clamp(14px,1.45vw,19px);height:auto;min-height:38px;padding:4px 3px 0;line-height:1.25;white-space:normal;color:#43556d}
-.gem-option{background:#fff;border:3px solid #d9e3f1;border-radius:23px;padding:7px;box-shadow:0 4px 0 #e5eaf2}
-.gem-option:has(.gem.picked){border-color:#386caa;background:#f0f8ff}
-@media(max-width:740px){.role .role-description{font-size:13px;min-height:30px}.gem-option{padding:3px;border-width:2px}}
-
-/* 요청 수정: 두 번째 보석의 카드 테두리 제거 및 세 보석 동일 크기 */
-.gem-select-layout{--select-gem-width:clamp(165px,22vw,235px);--select-gem-height:clamp(118px,19vh,170px)}
-.gem-select-layout .gem-fixed .gem,.gem-select-layout .gem-option .gem{width:var(--select-gem-width);height:var(--select-gem-height);min-height:0;max-height:none;flex:0 0 auto}
-.gem-select-layout .gem-option-grid{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,30px);height:auto;width:100%}
-.gem-select-layout .gem-option{border:0;background:transparent;box-shadow:none;padding:0;border-radius:0;flex:0 0 auto;align-items:center}
-.gem-select-layout .gem-option:has(.gem.picked){border:0;background:transparent}
-.gem-select-layout .gem-name{font-size:clamp(29px,3.4vw,46px)}
-@media(max-width:740px){.gem-select-layout{--select-gem-width:clamp(135px,34vw,190px);--select-gem-height:clamp(100px,17vh,130px)}.gem-select-layout .gem-name{font-size:clamp(27px,5vw,38px)}}
-
-/* 화면별 문구와 배치 개선 */
-.has-operator section:has(.roles)>footer{margin-top:clamp(26px,5vh,58px);padding-bottom:clamp(8px,2vh,20px)}
-.has-operator section:has(.roles)>.roles{margin-top:auto;margin-bottom:0}
-.photo-pair .photo-gem{padding:6px 12px;display:flex;align-items:center;justify-content:center;width:clamp(145px,22vw,235px);height:clamp(105px,19vh,170px)}
-.photo-pair .photo-gem .gem{height:100%;width:100%;min-height:0;max-height:none;pointer-events:none}
-.photo-pair .photo-gem .gem-name{font-size:clamp(27px,3.4vw,46px)}
-.discussion-hint-icon{white-space:nowrap;letter-spacing:-5px;padding-right:5px}
-.photo-screen .color-upload{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,54px);margin:clamp(20px,5vh,54px) 0}
-.photo-screen .color-upload p{margin:0;display:flex;align-items:center;justify-content:center;min-height:90px}
-.photo-screen .color-upload strong{line-height:1.4}
-.photo-screen .upload-footer{padding-bottom:clamp(10px,3vh,28px)}
-@media(max-width:699px){.photo-screen .color-upload{flex-direction:column;gap:12px;margin:14px 0}.photo-pair .photo-gem{width:40%;height:105px}.photo-screen .color-upload strong{font-size:26px}}
-
-/* 사진 확인: 작은 네모 글자칸 대신 실제 마음보석 다이아몬드를 크게 표시 */
-.photo-pair{width:min(900px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,30px);align-items:center;justify-items:center;margin:clamp(12px,2vh,22px) auto;flex-shrink:0}
-.photo-pair > .photo-gem{background:transparent;border:4px solid #345d8b;border-radius:28px;padding:8px 12px;box-shadow:0 4px 0 #d5dfe9;width:100%;height:clamp(155px,25vh,245px);display:flex;align-items:center;justify-content:center}
-.photo-pair > .photo-gem .gem{display:flex;width:100%;height:100%;min-height:0;max-height:none;pointer-events:none;border:0;background:transparent;padding:0;box-shadow:none;border-radius:0;overflow:visible}
-.photo-pair > .photo-gem .gem .facet{background:conic-gradient(from 35deg at 50% 34%,#fff3 0deg 32deg,#091c4d44 32deg 70deg,#ffffff44 70deg 99deg,#15245238 99deg 136deg,#ffffff22 136deg 170deg,#10194055 170deg 204deg,#ffffff66 204deg 229deg,#0f1d3b33 229deg 260deg,#ffffff33 260deg 294deg,#0b203a44 294deg 323deg,#fff4 323deg 360deg);clip-path:var(--diamond-cut);border:0;border-radius:0;padding:0;box-shadow:none}
-.photo-pair > .photo-gem .gem-name{font-size:clamp(42px,5vw,76px);border:0;border-radius:18px;padding:6px 15px 9px;background:#ffffffed;box-shadow:0 0 0 3px #ffffffbb;white-space:nowrap}
-@media(max-width:740px){.photo-pair{gap:10px}.photo-pair > .photo-gem{height:145px;padding:4px;border-width:3px}.photo-pair > .photo-gem .gem-name{font-size:clamp(25px,5vw,42px);padding:4px 8px}}
-
-/* 역할 설명은 카드 바깥에 표시: 그림과 역할명만 카드 안에 */
-section:has(> .roles) .roles{margin-top:auto;align-items:stretch;gap:clamp(10px,1.3vw,18px)}
-section:has(> .roles) .role{min-height:clamp(150px,22vh,215px);justify-content:center;gap:10px;padding:14px 8px}
-section:has(> .roles) .role-name{font-size:clamp(22px,2.4vw,33px)}
-section:has(> .roles) .role-description-outside{min-height:clamp(50px,9vh,76px);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(21px,2.1vw,29px);font-weight:800;line-height:1.3;color:#29425f;padding:8px 12px;width:100%}
-section:has(> .roles) footer{margin-top:10px;margin-bottom:clamp(8px,2vh,20px)}
-@media(max-width:740px){section:has(> .roles) .role{min-height:120px}section:has(> .roles) .role-description-outside{font-size:19px;min-height:55px}}
-
-/* 참관교사: 네 보석 중 정확히 두 개를 선택 */
-.teacher-gem-options{width:min(920px,100%);justify-content:center;flex:1}
-.teacher-gem-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));height:clamp(260px,49vh,460px);width:min(750px,100%)}
-.teacher-gem-grid .gem-option .gem{height:100%;width:100%}
-@media(max-width:740px){.teacher-gem-grid{height:clamp(260px,45vh,370px)}}
-
-/* 교사용 전자칠판 화면 */
-.teacher-choice-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);width:min(100%,920px);margin:clamp(12px,2vh,24px) auto 0}
-.teacher-choice-row .group-choice{width:100%;min-height:clamp(78px,12vh,115px);font-size:clamp(24px,2.5vw,38px)}
-.teacher-choice{background:#eee6ff!important;border-color:#a38bd8!important;color:#4c3579!important}
-.observer-choice{background:#f4e9fa!important;border-color:#bd99d4!important;color:#634475!important}
-.teacher-timer-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(15px,3vh,30px)}
-.teacher-timer{font-size:clamp(110px,19vw,310px);font-weight:950;line-height:1.05;color:#263e65;font-variant-numeric:tabular-nums;letter-spacing:.015em;text-shadow:0 5px 0 #dce6f5}
-.teacher-timer-controls{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:clamp(22px,2vw,30px);font-weight:800}
-.teacher-timer-controls select{font:inherit;padding:12px 18px;border:2px solid #a6bad8;border-radius:18px;background:white;color:#253b5d}
-.teacher-timer-controls button{font-size:clamp(22px,2vw,29px);padding:16px 32px;min-height:65px}
-@media(max-height:700px){.teacher-timer{font-size:clamp(100px,17vh,170px)}.teacher-choice-row .group-choice{min-height:70px}}
-.group6{--accent:#7051a3;--soft:#efe6ff}
-.group-grid .group-choice:last-child{grid-column:auto;padding:22px 20px;font-size:inherit;border-style:solid}
-.setup:has(.teacher-choice-row){justify-content:flex-start;overflow-y:auto;padding-top:clamp(4px,1vh,16px)}
-.setup:has(.teacher-choice-row) .group-grid{width:min(900px,100%);gap:clamp(8px,1.2vw,16px);margin-top:10px}
-.setup:has(.teacher-choice-row) .group-grid .group-choice{min-height:clamp(68px,11vh,105px);padding:8px 14px;font-size:clamp(24px,2.7vw,35px)}
-.setup:has(.teacher-choice-row) .group-grid .group-art{width:clamp(45px,6vh,75px);height:clamp(45px,6vh,75px)}
-.setup:has(.teacher-choice-row) .teacher-choice-row{margin-top:12px}
-.setup:has(.teacher-choice-row) .observer-resources{margin-top:12px}
-@media(max-width:699px){.teacher-choice-row{width:100%;gap:8px}.teacher-choice-row .group-choice{font-size:19px;min-height:65px;padding:10px 5px}}
-
-/* Teacher whiteboard: timer beneath gem selection and on filming page */
-.teacher-timer-panel{display:flex;flex-direction:column;align-items:center;gap:12px;margin:20px auto 8px;padding:16px 24px;border:3px solid #c9d9ed;border-radius:24px;background:rgba(255,255,255,.86);width:max-content;max-width:94%;box-sizing:border-box}
-.teacher-timer-panel .teacher-timer{font-size:clamp(56px,8vw,120px);font-weight:900;line-height:1.05;color:#243c5c;font-variant-numeric:tabular-nums}
-.teacher-timer-panel .teacher-timer-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
-.teacher-timer-panel .teacher-timer-controls button{font-size:clamp(16px,1.6vw,23px);padding:12px 18px}
-.teacher-timer-panel .teacher-timer-controls select{font-size:22px;padding:8px;border-radius:12px}
-.teacher-timer-screen .teacher-photo-guide{display:flex;align-items:center;justify-content:center;gap:16px;font-size:30px}
-.group6 .teacher-gem-grid .gem{min-width:155px;min-height:105px}
-.group6 .gem-select-screen .teacher-timer-panel{margin-top:16px}
-@media(max-height:760px){.group6 .gem-select-screen .teacher-timer-panel .teacher-timer{font-size:55px}.group6 .gem-select-screen .teacher-timer-panel{padding:8px 16px;gap:6px;margin-top:8px}.group6 .gem-select-screen .teacher-gem-grid .gem{min-height:75px}}
-
-/* Teacher-only: a distinct faceted diamond, not the observer teacher avatar. */
-.teacher-diamond-art{display:inline-flex;align-items:center;justify-content:center;font-size:1.25em;line-height:1;color:#55a8e7;text-shadow:-3px -3px #d6f5ff,3px 3px #27649e;transform:scaleX(1.1)}
-.teacher-choice .teacher-diamond-art{font-size:1.3em;margin-right:10px}
-/* Keep the 15-minute timer below the teacher's two-gem selection, not inside the choices. */
-.teacher-select-timer{width:100%;display:flex;justify-content:center;margin:clamp(12px,2vh,24px) auto 0}
-.teacher-select-timer .teacher-timer-panel{margin:0 auto;padding:12px 20px}
-.teacher-select-timer .teacher-timer{font-size:clamp(52px,7vw,100px)}
-@media(max-height:750px){.group6 .gem-select-screen{overflow-y:auto;justify-content:flex-start}.teacher-select-timer .teacher-timer-panel{padding:8px 14px}.teacher-select-timer .teacher-timer{font-size:52px}.teacher-select-timer .teacher-timer-controls button{padding:8px 12px;min-height:45px}}
-
-/* 공개수업 역할 카드가 화면 아래로 쏠리지 않도록 상단 배치 */
-.group6 section:has(> .roles)>.roles{margin-top:clamp(22px,6vh,65px)!important;margin-bottom:0!important}
-.group6 section:has(> .roles) footer{margin-top:clamp(16px,3vh,30px)!important}
-.group6 .gem-select-layout{justify-content:center}
-
-/* 공개수업용: 유아 모둠 4개와 선생님용 모두 역할 카드를 위쪽에 배치 */
-.app.has-operator section:has(> .roles) > .roles{margin-top:clamp(18px,5vh,55px)!important;margin-bottom:0!important}
-.app.has-operator section:has(> .roles) > footer{margin-top:clamp(14px,3vh,28px)!important}
 
 .reflection-questions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,28px);max-width:950px;margin:26px auto 4px}.reflection-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;font-size:clamp(15px,1.7vw,25px);font-weight:700;color:#24334c;line-height:1.35}.reflection-icon{font-size:clamp(30px,3.5vw,50px);line-height:1.2}.reflection-note{font-size:clamp(13px,1.35vw,19px);color:#61718b;text-align:center;margin:10px auto}.score-screen .score-stars,.diamond-score-screen .diamond-score-buttons{margin-top:18px;margin-bottom:10px}@media(max-width:620px){.reflection-questions{gap:6px}.reflection-item{font-size:12px}.reflection-icon{font-size:28px}}
 
-/* 선생님용 작전회의: 회의 완료 전에 손 반짝반짝 */
-.sparkle-hands{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px auto 14px;color:#364f82;font-weight:900;font-size:clamp(22px,2.3vw,35px)}
-.sparkle-hands span{font-size:clamp(34px,3.4vw,52px)}
-.discussion-check:disabled{opacity:1;cursor:default}
-/* 교사용 사진 모아보기 */
-.photo-dashboard{margin:16px 0;padding:16px;border:2px solid #e6e3f2;border-radius:18px;background:#faf9ff;text-align:center}
-.photo-dashboard .photo-thumbnails{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0;max-height:260px;overflow-y:auto}
-.photo-dashboard .photo-thumbnails img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px}
-.photo-screen input[type=file]{max-width:95%;padding:14px;border:2px dashed #9a84c4;border-radius:12px;background:white}
+/* 올림이 사진 전송 및 교사용 모아보기 */
+.photo-transfer-card{background:#fff;border:2px solid #ddd;border-radius:20px;padding:24px;margin:20px auto;max-width:520px;text-align:center}.photo-pick-label{display:block;background:#e8f3ff;color:#174f90;border-radius:16px;padding:20px;font-weight:800;cursor:pointer}.photo-pick-label input{display:block;width:100%;margin-top:12px;font-size:16px}.photo-filename{overflow-wrap:anywhere;font-size:15px}.photo-transfer-error{color:#b42318;font-weight:700}.photo-teacher-dialog{max-height:90vh;overflow:auto}.photo-pin-input{padding:12px;border:1px solid #aaa;border-radius:10px;width:100%;box-sizing:border-box}.photo-teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}.photo-teacher-item{border:1px solid #ddd;border-radius:12px;padding:8px}.photo-teacher-item img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#eee}.photo-teacher-item button{width:100%}@media(min-width:700px){.photo-teacher-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
-/* 모둠 이름이 표시되는 작은 사진 미리보기 */
-.photo-dashboard .photo-thumbnails{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;max-height:250px}
-.photo-dashboard .photo-thumbnail-card{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
-.photo-dashboard .photo-thumbnail-card a{display:block;width:100%;max-width:112px}
-.photo-dashboard .photo-thumbnail-card img{width:100%;height:76px;aspect-ratio:auto;object-fit:cover;border-radius:8px}
-.photo-dashboard .photo-thumbnail-card span{font-size:12px;font-weight:700;line-height:1.25;color:#344466;white-space:nowrap}
+.activity-select-grid{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin:auto 0}.activity-select-grid .gem{min-width:190px;max-width:280px;flex:1}.selection-count{text-align:center;font-size:26px;color:#435d7a;font-weight:700}.select-screen .question{text-align:center}
+@media(max-width:699px){.activity-select-grid .gem{min-width:130px}.selection-count{font-size:21px}}
 
-/* 공개수업용 마음보석 평가 결과 */
-.gem-result-screen{box-sizing:border-box;width:100%;min-width:0;display:flex;flex-direction:column;align-items:center;gap:16px;padding:12px 14px 30px}
-.gem-result-card{box-sizing:border-box;background:#141b3c;color:#fff;border-radius:25px;width:min(100%,850px);padding:22px 26px;text-align:center}
-.gem-result-card h1{color:#fff1b5;font-size:clamp(23px,2.8vw,34px);margin:0 0 8px}
-.gem-result-card p{color:#ccd5f2;margin:8px 0}
-.gem-readiness{margin:20px auto;max-width:680px}
-.gem-readiness h2{color:#fff1b5}
-.gem-readiness-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px auto}
-.gem-readiness-item{background:#303a60;border-radius:12px;padding:12px 8px;display:flex;flex-direction:column;gap:7px}
-.gem-readiness-item span{color:#ffe083}
-.gem-readiness .primary,.gem-readiness .secondary{margin:8px;max-width:100%}
-.gem-waiting{font-size:14px}
-.gem-result-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 10px;margin:20px auto;padding:0 8%;max-width:640px;justify-items:center}
-.gem-result-gem{display:block;color:#34415f;font-size:clamp(20px,3.1vw,32px);line-height:1.35;transition:color .18s,transform .18s}
-.gem-result-gem.lit{color:#ffd700;animation:gem-pop .28s ease-out,gem-twinkle 1.5s ease-in-out infinite alternate;text-shadow:0 0 9px #ffd700aa}
-@keyframes gem-pop{0%{transform:scale(.7)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
-@keyframes gem-twinkle{from{text-shadow:0 0 4px #ffd70088}to{text-shadow:0 0 17px #fff0a0}}
-.gem-meter-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:clamp(17px,2.3vw,23px);margin:16px 0 9px}
-.gem-meter-label strong:last-child{color:#ffd700}
-.gem-meter{height:54px;background:#354363;border-radius:999px;overflow:hidden}
-.gem-meter-fill{height:100%;background:#ffd700;border-radius:999px;transition:width .24s linear}
-.gem-reward{padding:14px 0 3px;animation:gem-pop .5s ease-out}
-.gem-reward h2{color:#fff1b5;margin:8px 0;font-size:clamp(20px,2.6vw,29px)}
-.gem-result-screen footer{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-.diamond-score-screen:has(.diamond-score-button:nth-child(10)) .diamond-score-buttons{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));max-width:650px;margin-inline:auto;gap:10px}
-@media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-result-grid{gap:5px 7px;padding:0 4%}.gem-result-screen{padding:8px}}
+.photo-gallery-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:12px 0}
 
-/* 공개수업: 결과 대기 화면은 중앙 시작 버튼만 표시 */
-.gem-result-screen{width:100%;max-width:100%;padding:12px 14px 24px;overflow:hidden}
-.gem-result-card{width:min(100%,780px);max-width:100%;padding:20px 26px}
-.gem-start-only{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:28px 10px 35px}
-.pentagon-gem{display:inline-block;flex:none;overflow:visible;color:#ffd700}
-.teacher-diamond-art{width:1.2em;height:1.2em;filter:drop-shadow(0 2px 2px #27649e);transform:none;color:#58b9f8}
-.teacher-choice .teacher-diamond-art{width:1.3em;height:1.3em;margin-right:10px}
-.gem-start-symbol{width:clamp(110px,17vw,180px);height:clamp(110px,17vw,180px);filter:drop-shadow(0 0 22px #ffda4788);animation:gem-twinkle 1.5s ease-in-out infinite alternate}
-.gem-start-button{border:3px solid #ffe06b;border-radius:999px;background:#ffd437;color:#151e42;font-family:inherit;font-size:clamp(25px,3.3vw,40px);padding:18px 32px;min-width:min(90%,390px);display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:0 5px 22px #ffcd4777;cursor:pointer}
-.gem-start-button:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
-.gem-button-symbol{width:1.1em;height:1.1em;color:#e6a900}
-.gem-result-gem{width:clamp(18px,2.5vw,28px);height:clamp(18px,2.5vw,28px);color:#34415f;filter:none}
-.gem-result-gem.lit{color:#ffd700;filter:drop-shadow(0 0 6px #ffd70099)}
-.gem-result-grid{gap:8px 12px;max-width:550px;margin:18px auto;padding:0 9%}
-.gem-inline-symbol{width:1em;height:1em;vertical-align:-.13em}
-.gem-result-card .gem-meter{height:54px}
-.diamond-score-button .score-diamond{clip-path:polygon(50% 3%,96% 37%,78% 96%,22% 96%,4% 37%)}
-@media(max-width:650px){.gem-result-card{padding:18px 12px}.gem-start-only{padding:24px 5px}.gem-result-grid{gap:7px 8px;padding:0 7%}}
+/* 마음보석 별빛 결과 */
+.star-result-screen{min-height:75vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:20px}
+.star-result-card{background:#141b3c;color:#fff;border-radius:26px;width:min(100%,850px);padding:30px 24px;text-align:center;box-sizing:border-box}
+.star-result-card h1{color:#fff1b5;font-size:clamp(23px,3.3vw,35px);margin:0 0 12px}
+.star-result-card p{color:#ccd5f2}
+.star-result-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px 16px;margin:30px auto;padding:0 8%;max-width:680px;justify-items:center}
+.star-result-star{display:block;font-size:clamp(19px,3.4vw,35px);line-height:1.25;color:#34415f;transition:color .16s,transform .2s,text-shadow .2s}
+.star-result-star.lit{color:#ffd700;animation:star-light-pop .35s ease-out,star-twinkle 1.8s ease-in-out infinite alternate;text-shadow:0 0 8px #ffd70088}
+@keyframes star-light-pop{0%{transform:scale(.65)}65%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes star-twinkle{from{text-shadow:0 0 3px #ffd70077}to{text-shadow:0 0 15px #ffe75b}}
+.star-meter-label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:clamp(16px,2.6vw,24px);margin:18px 0 10px}
+.star-meter-label strong:last-child{color:#ffd700}
+.star-meter{height:54px;background:#354363;border-radius:999px;overflow:hidden}
+.star-meter-fill{height:100%;background:#ffd700;border-radius:999px;transition:width .2s linear}
+.star-reward{padding:18px 4px 4px;animation:star-light-pop .5s ease-out}
+.star-reward h2{color:#fff1b5;margin:8px 0;font-size:clamp(20px,3vw,30px)}
+.star-result-screen footer{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+@media(max-width:550px){.star-result-grid{gap:9px 11px;padding:0 5%}.star-result-card{padding:24px 14px}}
 
-.gem-average-note,.gem-exact-score{color:#ffeaa0!important;font-size:clamp(15px,1.7vw,20px);text-align:center;margin:10px 0}
+/* 별빛 결과는 왼쪽 교사 역할 영역을 침범하지 않도록 본문 안에만 표시 */
+.star-result-screen{width:100%;max-width:100%;min-width:0;min-height:0;flex:1;padding:8px 12px 10px;gap:10px;justify-content:flex-start;overflow-y:auto}
+.star-result-card{width:min(100%,740px);max-width:100%;margin:0 auto;padding:15px 20px;border-radius:22px;flex-shrink:0}
+.star-result-card h1{font-size:clamp(20px,2.1vw,29px);margin:0 0 4px}
+.star-result-card>p{font-size:clamp(13px,1.2vw,17px);margin:0}
+.star-result-grid{max-width:520px;gap:5px 10px;margin:13px auto;padding:0 8%;}
+.star-result-star{font-size:clamp(16px,2vw,25px);line-height:1.15}
+.star-meter-label{font-size:clamp(15px,1.5vw,21px);margin:12px 0 8px}
+.star-meter{height:54px}
+.star-ready-panel{padding:9px 0 0}
+.star-ready-panel p{font-size:clamp(14px,1.3vw,18px);margin:10px 0}
+.star-score-status{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.star-score-status span{border-radius:14px;padding:5px 9px;background:#303b63;color:#fff1b5;font-size:clamp(12px,1.1vw,16px)}
+.star-start-button{padding:12px 25px;font-size:22px;margin:3px 8px}
+.star-refresh-button{padding:10px 14px;font-size:15px;margin:3px}
+.star-result-screen footer{flex-shrink:0;margin:0}
+.star-result-screen footer button{font-size:16px;padding:10px 18px;min-height:42px}
+.star-reward{padding:8px 4px 0}
+.star-reward h2{font-size:clamp(19px,2.1vw,27px);margin:3px 0}
+.star-celebration{font-size:26px;animation:star-light-pop .5s ease-out}
+.role-upload-symbol{font-size:46px}
+@media(max-height:850px){.star-result-grid{gap:3px 9px;margin:8px auto}.star-result-card{padding:10px 18px}.star-result-screen{gap:5px}.star-meter{height:54px}}
+@media(max-width:800px){.star-result-card{width:100%;padding:12px}.star-result-grid{padding:0 4%;gap:6px}.star-result-star{font-size:18px}}
 
-/* Teacher-only discussion countdown beside the sparkle-hands guide. */
-.discussion-screen .guided-footer{position:relative}
-.discussion-screen .guided-footer:has(.discussion-timer-panel) .sparkle-hands{margin-right:0;margin-left:0}
-.discussion-screen .guided-footer:has(.discussion-timer-panel){display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,auto);align-items:center;justify-items:center;gap:8px 18px}
-.discussion-screen .guided-footer:has(.discussion-timer-panel)>.primary{grid-column:1/-1}
-.discussion-timer-panel{display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 12px;border:2px solid #a9c7ec;border-radius:16px;background:#f1f8ff;color:#284e7b;min-width:210px}
-.discussion-timer-time{font-size:clamp(25px,2.8vw,39px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
-.discussion-timer-buttons{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;font-size:14px;font-weight:800}
-.discussion-timer-buttons select,.discussion-timer-buttons button{font:inherit;border:1px solid #8eaed4;border-radius:8px;padding:5px 7px;background:white;color:#284e7b;cursor:pointer}
-.discussion-timer-buttons button:first-of-type{background:#377bd1;color:white}
-.discussion-timer-buttons button:disabled{opacity:.5;cursor:not-allowed}
-.discussion-timer-done{color:#bc3154;font-size:15px}
-@media(max-width:560px){.discussion-screen .guided-footer:has(.discussion-timer-panel){grid-template-columns:1fr;gap:4px}.discussion-screen .guided-footer:has(.discussion-timer-panel)>.primary{grid-column:1}}
+.general-settings{margin:20px auto;padding:15px;border:2px solid #d6dced;border-radius:16px;max-height:55vh;overflow-y:auto;text-align:left}.general-settings label{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-weight:bold}.general-settings input,.general-settings select{width:100%;padding:11px;border:2px solid #b9c6df;border-radius:10px;font:inherit;color:#172044;background:white}.general-settings-line{display:flex;gap:8px;margin:7px 0}.general-settings-line input{flex:1;min-width:0}.general-settings h3,.general-settings h4{margin:16px 0 8px}.general-settings button{margin:5px 0}.general-settings .primary{width:100%;margin-top:16px}
+
+
+/* 2026-11-24: 사진 선택은 선택 사항 + Canva/Padlet 선택 화면 */
+.share-screen .color-upload { flex-direction:row; gap:24px; margin:0 0 10px; }
+.share-screen .color-upload p { margin:0; text-align:left; }
+.share-screen .canva-share-button {
+  background:#fff;
+  border:4px solid var(--upload-color, #2fa56b);
+  color:#263751;
+  box-shadow:0 6px 0 color-mix(in srgb, var(--upload-color, #2fa56b) 48%, white);
+}
+.share-screen .canva-share-button .padlet-app-icon { object-fit:contain; }
+.share-screen .padlet-next-button {
+  background:color-mix(in srgb, var(--upload-color, #2fa56b) 17%, white);
+  color:var(--upload-ink, #263751);
+  border:3px solid var(--upload-color, #2fa56b);
+}
+.share-screen .reflection-note { text-align:center; margin:0; }
+.photo-transfer-card .photo-pick-label input { cursor:pointer; }
+
+@media(max-width:699px){
+  .share-screen .color-upload{flex-direction:column;gap:8px}
+  .share-screen .color-upload p{text-align:center}
+}
